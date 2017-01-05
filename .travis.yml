@@ -17,11 +17,6 @@ env:
     - DOCKER_HOST="tcp://127.0.0.1:2375"
     - MAVEN_OPTS="-XX:MaxPermSize=2g -Xmx4g -Dfile.encoding=UTF-8"
     - JAVA_OPTS="-XX:MaxPermSize=2g -Xmx4g -Dfile.encoding=UTF-8"
-install:
-  - docker build -t rultor -f src/docker/Dockerfile ./src/docker
-  - travis_wait mvn dependency:resolve > /dev/null
 script:
   - mvn clean install -Pqulice -PdockerITs --errors
-  - >
-    docker run --volume=$(pwd):/work --volume=$HOME/.m2 --workdir=/work
-      mvn clean install -Pqulice --errors
+  - docker build -t rultor -f src/docker/Dockerfile ./src/docker
