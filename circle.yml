@@ -13,4 +13,4 @@ general:
 test:
   override:
     - unset GEM_PATH; mvn clean install -Pqulice
-
+    - docker build -t rultor -f src/docker/Dockerfile ./src/docker
