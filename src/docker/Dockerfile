@@ -91,7 +91,6 @@ RUN apt-get install -y default-jdk
 RUN apt-get install -y texlive-latex-extra
 RUN apt-get install -y xzdec
 RUN tlmgr init-usertree
-RUN tlmgr install helvetic
 RUN tlmgr install psnfss
 
 # PhantomJS
