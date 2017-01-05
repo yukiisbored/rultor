@@ -17,9 +17,9 @@ env:
     - DOCKER_HOST="tcp://127.0.0.1:2375"
     - MAVEN_OPTS="-XX:MaxPermSize=2g -Xmx4g -Dfile.encoding=UTF-8"
     - JAVA_OPTS="-XX:MaxPermSize=2g -Xmx4g -Dfile.encoding=UTF-8"
-matrix:
-  include:
-    - env: BUILD_DOCKER=true
+  matrix:
+    - BUILD_DOCKER=true
+    - BUILD_DOCKER=false
 script:
   - >
     if [[ "$BUILD_DOCKER" == "true" ]]; then
