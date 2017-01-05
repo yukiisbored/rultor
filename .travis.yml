@@ -19,14 +19,11 @@ env:
     - JAVA_OPTS="-XX:MaxPermSize=2g -Xmx4g -Dfile.encoding=UTF-8"
 matrix:
   include:
-    - env: BUILD_DOCKER=false
     - env: BUILD_DOCKER=true
-install:
-  - mvn dependency:get > /dev/null
 script:
   - >
     if [[ "$BUILD_DOCKER" == "true" ]]; then
-      mvn clean install -Pqulice -PdockerITs --errors
-    else
       docker build -t rultor -f src/docker/Dockerfile ./src/docker
+    else
+      mvn clean install -Pqulice -PdockerITs --errors
     fi
