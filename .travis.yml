@@ -18,9 +18,10 @@ env:
     - MAVEN_OPTS="-XX:MaxPermSize=2g -Xmx4g -Dfile.encoding=UTF-8"
     - JAVA_OPTS="-XX:MaxPermSize=2g -Xmx4g -Dfile.encoding=UTF-8"
 install:
-  - docker build -t rultor -f src/docker/Dockerfile ./src/docker
+  - docker build -q -t rultor -f src/docker/Dockerfile ./src/docker
+  - mvn dependency:resolve > /dev/null
 script:
   - mvn clean install -Pqulice -PdockerITs --errors
   - >
-    docker run --volume=$(pwd)/work --workdir=/work
+    docker run --volume=$(pwd):/work --volume=$HOME/.m2 --workdir=/work
       mvn clean install -Pqulice --errors
